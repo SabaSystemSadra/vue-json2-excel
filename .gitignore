@@ -1,3 +1,5 @@
+src/App.vue
+src/main.js
 .DS_Store
 node_modules
 /dist
