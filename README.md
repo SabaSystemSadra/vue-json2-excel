@@ -12,7 +12,7 @@ or
 yarn add vue-json2-excel
 ```
 ## Usage
-```
+```vue
     <template>
         <json2-excel
         :data="data"
