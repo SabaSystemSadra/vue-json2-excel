@@ -95,7 +95,7 @@
             makeExport() {
                 let name = `${this.filename}${this.counter ? '('+ this.counter++ + ')' : ''}`;
                 this.workBook.SheetNames = [name];
-                this.workBook.Sheets.test = this.workSheet;
+                this.workBook.Sheets[name] = this.workSheet;
 
                 xlsx.writeFile(this.workBook, `${name}.xlsx`);
             },
