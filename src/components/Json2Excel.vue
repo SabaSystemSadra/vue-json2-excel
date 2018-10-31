@@ -25,17 +25,24 @@
                 default() {
                     return {};
                 }
-            }
+            },
+            filename: {
+                type: String,
+                default: 'vue-json2-excel'
+            },
         },
         name: "Json2Excel",
         data() {
             return {
                 workBook: {},
-                workSheet: {}
+                workSheet: {},
+                counter: 0,
             }
         },
         methods: {
             init() {
+                this.workBook = {};
+                this.workSheet = {};
                 this.workBook = xlsx.utils.book_new();
             },
             makeDetails() {
@@ -86,12 +93,14 @@
 
             },
             makeExport() {
-                this.workBook.SheetNames.push('test');
+                let name = `${this.filename}${this.counter ? '('+ this.counter++ + ')' : ''}`;
+                this.workBook.SheetNames = [name];
                 this.workBook.Sheets.test = this.workSheet;
 
-                xlsx.writeFile(this.workBook, 'test.xlsx');
+                xlsx.writeFile(this.workBook, `${name}.xlsx`);
             },
             exportToExcel() {
+                this.init();
                 this.makeDetails();
                 this.makeHeader();
                 this.makeData();
@@ -99,14 +108,11 @@
                 this.makeExport();
             }
         },
-        created() {
-            this.init();
-        },
     }
 </script>
 
 <style scoped>
-    .main:hover{
+    .main:hover {
         cursor: pointer;
     }
 </style>
