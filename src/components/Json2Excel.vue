@@ -20,6 +20,10 @@
                     return [];
                 }
             },
+            clickable:{
+                type:Boolean,
+                default:false
+            },
             details: {
                 type: Object,
                 default() {
@@ -100,6 +104,9 @@
                 xlsx.writeFile(this.workBook, `${name}.xlsx`);
             },
             exportToExcel() {
+                if (!this.clickable) {
+                    return;
+                }
                 this.init();
                 this.makeDetails();
                 this.makeHeader();
